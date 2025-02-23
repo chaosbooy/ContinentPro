@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\Goldman\Goldman-Bold.ttf" />
+    <None Remove="Resources\Fonts\Goldman\Goldman-Regular.ttf" />
+    <None Remove="Resources\Images\europe.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Goldman\Goldman-Bold.ttf" />
+    <Resource Include="Resources\Fonts\Goldman\Goldman-Regular.ttf" />
+    <Resource Include="Resources\Images\europe.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Save\" />
+    <Folder Include="Resources\Sounds\" />
+  </ItemGroup>
+
+</Project>
