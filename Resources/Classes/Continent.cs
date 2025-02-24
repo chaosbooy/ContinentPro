@@ -12,8 +12,10 @@ namespace ContinentPro.Resources.Classes
         public string Name { get; set; }
         public string Description { get; set; }
         public string ContinentImageLocation { get; set; }
-        public Point Size { get; set; }
-        public Point Location { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Latitude { get; set; }
+        public int Longitude { get; set; }
 
         public Continent()
         {

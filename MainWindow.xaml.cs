@@ -1,10 +1,10 @@
 ﻿using ContinentPro.Resources.Classes;
-using System.Data;
 using System.Diagnostics;
-using System.Text;
+using System.IO;
+using System.Speech.Synthesis;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -21,26 +21,68 @@ namespace ContinentPro
 
         private double originalWidth, originalHeight, originalLeft, originalTop;
         private bool isExpanded = false;
+        private readonly SpeechSynthesizer BuiltInSpeech= new();
+
+        string? RootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
 
         public MainWindow()
         {
+
             InitializeComponent();
+            InitialContinents();
+
+            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
+
+            BuiltInSpeech.StateChanged += ChangeSpeechUI;
+            ChangeSpeechUI(null, null);
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch(e.Key)
+            {
+                case Key.Escape:
+                    if (isExpanded)
+                    {
+                        foreach (Label continent in MainGrid.Children)
+                        {
+                            if (continent.Name != ContinentName.Content.ToString())
+                            {
+                                AnimateButton(continent, originalWidth, originalHeight, originalLeft, originalTop);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case Key.Space:
+                    ReloadContent();
+                    break;
+            }
+        }
+
+        private void ReloadContent()
+        {
+            MainGrid.Children.RemoveRange(MainGrid.Children.Count - continents.Count(), continents.Count());
             InitialContinents();
         }
 
         public void InitialContinents()
         {
-            if (continents == null)
+            using (StreamReader r = new StreamReader(RootPath + "/Resources/Save/ContinentsSave.json"))
             {
-                continents = new Continent[1];
-                continents[0] = new Continent
+                string jsonString = r.ReadToEnd();
+
+                var jsonObject = JsonSerializer.Deserialize<Continent[]>(jsonString);
+
+                if (jsonObject == null)
                 {
-                    Name = "Europe",
-                    Description = "Europe is a continent located entirely in the Northern Hemisphere and mostly in the Eastern Hemisphere. It comprises the westernmost part of Eurasia and is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, the Mediterranean Sea to the south, and Asia to the east.",
-                    ContinentImageLocation = "/Resources/Images/europe.png",
-                    Size = new System.Drawing.Point(200, 140),
-                    Location = new System.Drawing.Point(100, 100),
-                };
+                    Debug.WriteLine("Error loading continents");
+                    return;
+                }
+
+
+            continents = jsonObject;
+
             }
 
             foreach (Continent continent in continents)
@@ -50,9 +92,9 @@ namespace ContinentPro
                     Tag = continent.Name,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Width = continent.Size.X,
-                    Height = continent.Size.Y,
-                    Margin = new Thickness(continent.Location.X, continent.Location.Y, 0, 0),
+                    Width = continent.Width,
+                    Height = continent.Height,
+                    Margin = new Thickness(continent.Longitude, continent.Latitude, 0, 0),
                 };
 
                 button.Content = new Image
@@ -139,6 +181,78 @@ namespace ContinentPro
             ResizeButton.BeginAnimation(Button.WidthProperty, widthAnimation);
             ResizeButton.BeginAnimation(Button.HeightProperty, heightAnimation);
             ResizeButton.BeginAnimation(Button.MarginProperty, positionAnimation);
+        }
+
+        private void ReadText(string text)
+        {
+            string voice = BuiltInSpeech.GetInstalledVoices()[0].VoiceInfo.Name;
+            BuiltInSpeech.SelectVoice(voice);
+            BuiltInSpeech.SpeakAsync(text);
+        }
+
+        private void ContinentRead(object sender, EventArgs e)
+        {
+            if (BuiltInSpeech.State == SynthesizerState.Speaking)
+            {
+                BuiltInSpeech.SpeakAsyncCancelAll();
+                return;
+            }
+
+            ReadText(ContinentDescription.Text);
+        }
+
+        private void PlaceRead(object sender, EventArgs e)
+        {
+            if (BuiltInSpeech.State == SynthesizerState.Speaking)
+            {
+                BuiltInSpeech.SpeakAsyncCancelAll();
+                return;
+            }
+
+            ReadText(PlaceDescription.Text);
+        }
+
+        private void ChangeSpeechUI(object? sender, StateChangedEventArgs? e)
+        {
+            var muteImage1 = new Image
+            {
+                Source = new BitmapImage(new Uri(RootPath + "/Resources/Images/mute.png", UriKind.RelativeOrAbsolute))
+            };
+
+            var muteImage2 = new Image
+            {
+                Source = new BitmapImage(new Uri(RootPath + "/Resources/Images/mute.png", UriKind.RelativeOrAbsolute))
+            };
+
+            // Create separate mute containers for each button
+            Grid muteContainer1 = new Grid();
+            muteContainer1.Children.Add(new Border { Background = new SolidColorBrush(Colors.LightSlateGray) }); // Gray background
+            muteContainer1.Children.Add(muteImage1); // Mute icon
+
+            Grid muteContainer2 = new Grid();
+            muteContainer2.Children.Add(new Border { Background = new SolidColorBrush(Colors.LightSlateGray) });
+            muteContainer2.Children.Add(muteImage2); // Separate mute icon
+
+            // Set default state to mute for both
+            ContinentSpeech.Content = muteContainer1;
+            PlaceSpeech.Content = muteContainer2;
+
+            if (e != null && e.State == SynthesizerState.Speaking)
+            {
+                var volumeImage1 = new Image
+                {
+                    Source = new BitmapImage(new Uri(RootPath + "/Resources/Images/volume.png", UriKind.RelativeOrAbsolute))
+                };
+
+
+                Grid volumeContainer1 = new Grid();
+                volumeContainer1.Children.Add(new Border { Background = new SolidColorBrush(Colors.LightGreen) }); // Green background
+                volumeContainer1.Children.Add(volumeImage1); // Volume icon
+
+                // Update both buttons when speaking
+                ContinentSpeech.Content = volumeContainer1;
+            }
+
         }
     }
 }
