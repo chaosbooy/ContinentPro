@@ -24,7 +24,7 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\Goldman\Goldman-Bold.ttf" />
     <Resource Include="Resources\Fonts\Goldman\Goldman-Regular.ttf" />
-    <Resource Include="Resources\Images\europe.png" />
+    <Resource Include="Resources\Images\Continents\europe.png" />
     <Resource Include="Resources\Images\mute.png" />
     <Resource Include="Resources\Images\volume.png" />
   </ItemGroup>

@@ -18,6 +18,7 @@ namespace ContinentPro
     public partial class MainWindow : Window
     {
         private Continent[] continents;
+        private Label[] continentButtons;
 
         private double originalWidth, originalHeight, originalLeft, originalTop;
         private bool isExpanded = false;
@@ -37,32 +38,12 @@ namespace ContinentPro
             ChangeSpeechUI(null, null);
         }
 
-        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch(e.Key)
-            {
-                case Key.Escape:
-                    if (isExpanded)
-                    {
-                        foreach (Label continent in MainGrid.Children)
-                        {
-                            if (continent.Name != ContinentName.Content.ToString())
-                            {
-                                AnimateButton(continent, originalWidth, originalHeight, originalLeft, originalTop);
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                case Key.Space:
-                    ReloadContent();
-                    break;
-            }
-        }
-
         private void ReloadContent()
         {
-            MainGrid.Children.RemoveRange(MainGrid.Children.Count - continents.Count(), continents.Count());
+            foreach(var c in continentButtons)
+            {
+                MainGrid.Children.Remove(c);
+            }
             InitialContinents();
         }
 
@@ -80,11 +61,11 @@ namespace ContinentPro
                     return;
                 }
 
-
-            continents = jsonObject;
-
+                continents = jsonObject;
             }
-
+            
+            continentButtons = new Label[continents.Length];
+            var i = 0;
             foreach (Continent continent in continents)
             {
                 Label button = new Label
@@ -99,14 +80,42 @@ namespace ContinentPro
 
                 button.Content = new Image
                 {
-                    Source = new BitmapImage(new Uri(continent.ContinentImageLocation, UriKind.RelativeOrAbsolute)),
+                    Source = new BitmapImage(new Uri(RootPath + continent.ContinentImageLocation, UriKind.Absolute)),
                     Stretch = Stretch.Fill
                 };
 
                 button.MouseDown += Continent_Click;
 
                 // Add the button to the grid
-                MainGrid.Children.Add(button);
+                MainGrid.Children.Insert(1,button);
+                continentButtons[i++] = button;
+            }
+        }
+
+        #region UserInput
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    if (isExpanded && !isAnimating)
+                    {
+                        isExpanded = false;
+
+                        foreach (Label continent in continentButtons)
+                        {
+                            if (continent.Tag == ContinentName.Content)
+                            {
+                                InfoViewer.Visibility = Visibility.Hidden;
+                                AnimateButton(continent, originalWidth, originalHeight, originalLeft, originalTop);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case Key.Space:
+                    ReloadContent();
+                    break;
             }
         }
 
@@ -152,16 +161,27 @@ namespace ContinentPro
             }
         }
 
+        #endregion
+
+        #region UI
         private void ShowInfo(Continent information)
         {
             ContinentName.Content = information.Name;
             ContinentDescription.Text = information.Description;
         }
 
+        bool isAnimating;
         private void AnimateButton(Label ResizeButton, double newWidth, double newHeight, double newLeft, double newTop)
         {
+            if (isAnimating) return;
+            isAnimating = true;
+
             double animationLength = .5;
             ResizeButton.IsEnabled = false;
+
+            Debug.WriteLine($"Target: {ResizeButton.Tag.ToString()}");
+            Debug.WriteLine($"Width {originalWidth}, Height {originalHeight}, Left {originalLeft}, Top {originalTop}");
+            Debug.WriteLine($"Width {newWidth}, Height {newHeight}, Left {newLeft}, Top {newTop}");
 
             DoubleAnimation widthAnimation = new DoubleAnimation(newWidth, TimeSpan.FromSeconds(animationLength));
             DoubleAnimation heightAnimation = new DoubleAnimation(newHeight, TimeSpan.FromSeconds(animationLength));
@@ -171,17 +191,22 @@ namespace ContinentPro
 
             widthAnimation.Completed += (s, e) =>
             {
+                isAnimating = false;
                 ResizeButton.IsEnabled = true;
-                if(originalWidth != newWidth)
+                if(isExpanded)
                 {
                     InfoViewer.Visibility = Visibility.Visible;
                 }
             };
 
-            ResizeButton.BeginAnimation(Button.WidthProperty, widthAnimation);
-            ResizeButton.BeginAnimation(Button.HeightProperty, heightAnimation);
-            ResizeButton.BeginAnimation(Button.MarginProperty, positionAnimation);
+            ResizeButton.BeginAnimation(Label.WidthProperty, widthAnimation);
+            ResizeButton.BeginAnimation(Label.HeightProperty, heightAnimation);
+            ResizeButton.BeginAnimation(Label.MarginProperty, positionAnimation);
         }
+
+        #endregion
+
+        #region TTS
 
         private void ReadText(string text)
         {
@@ -254,5 +279,6 @@ namespace ContinentPro
             }
 
         }
+        #endregion
     }
 }

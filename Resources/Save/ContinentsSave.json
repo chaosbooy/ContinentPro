@@ -2,7 +2,7 @@
   {
     "Name": "Europe",
     "Description": "Europe is a continent located entirely in the Northern Hemisphere and mostly in the Eastern Hemisphere. It comprises the westernmost part of Eurasia and is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, the Mediterranean Sea to the south, and Asia to the east.",
-    "ContinentImageLocation": "/Resources/Images/europe.png",
+    "ContinentImageLocation": "/Resources/Images/Continents/europe.png",
     "Width": 200,
     "Height": 140,
     "Latitude": 100,
@@ -11,16 +11,16 @@
   {
     "Name": "Asia",
     "Description": "Asia is Earth's largest and most populous continent, located primarily in the Eastern and Northern Hemispheres. It shares the continental landmass of Eurasia with the continent of Europe and the continental landmass of Afro-Eurasia with both Europe and Africa.",
-    "ContinentImageLocation": "/Resources/Images/asia.png",
-    "Width": 200,
-    "Height": 140,
+    "ContinentImageLocation": "/Resources/Images/Continents/asia.png",
+    "Width": 400,
+    "Height": 200,
     "Latitude": 100,
     "Longitude": 100
   },
   {
     "Name": "Africa",
     "Description": "Africa is the world's second-largest and second-most populous continent, after Asia in both cases. At about 30.3 million km² including adjacent islands, it covers 6% of Earth's total surface area and 20% of its land area.",
-    "ContinentImageLocation": "/Resources/Images/africa.png",
+    "ContinentImageLocation": "/Resources/Images/Continents/africa.png",
     "Width": 200,
     "Height": 140,
     "Latitude": 100,
@@ -29,37 +29,37 @@
   {
     "Name": "North America",
     "Description": "North America is a continent entirely within the Northern Hemisphere and almost all within the Western Hemisphere. It can also be described as the northern subcontinent of the Americas.",
-    "ContinentImageLocation": "/Resources/Images/north-america.png",
+    "ContinentImageLocation": "/Resources/Images/Continents/north-america.png",
     "Width": 200,
     "Height": 140,
-    "Latitude": 100,
-    "Longitude": 100
+    "Latitude": -150,
+    "Longitude": -380
   },
   {
     "Name": "South America",
     "Description": "South America is a continent in the Western Hemisphere, mostly in the Southern Hemisphere, with a relatively small portion in the Northern Hemisphere. It may also be considered a subcontinent of the Americas, which is how it is viewed in Spanish and Portuguese-speaking regions of the Americas.",
-    "ContinentImageLocation": "/Resources/Images/south-america.png",
-    "Width": 200,
-    "Height": 140,
-    "Latitude": 100,
-    "Longitude": 100
+    "ContinentImageLocation": "/Resources/Images/Continents/south-america.png",
+    "Width": 270,
+    "Height": 200,
+    "Latitude": 150,
+    "Longitude": -300
   },
   {
-    "Name": "Australia",
+    "Name": "Australia and Oceania",
     "Description": "Australia, officially known as the Commonwealth of Australia, is a sovereign country comprising the mainland of the Australian continent, the island of Tasmania, and numerous smaller islands.",
-    "ContinentImageLocation": "/Resources/Images/australia.png",
-    "Width": 200,
-    "Height": 140,
+    "ContinentImageLocation": "/Resources/Images/Continents/oceania.png",
+    "Width": 300,
+    "Height": 200,
     "Latitude": 100,
-    "Longitude": 100
+    "Longitude": 500
   },
   {
     "Name": "Antarctica",
     "Description": "Antarctica is Earth's southernmost continent. It contains the geographic South Pole and is situated in the Antarctic region of the Southern Hemisphere, almost entirely south of the Antarctic Circle, and is surrounded by the Southern Ocean.",
-    "ContinentImageLocation": "/Resources/Images/antarctica.png",
-    "Width": 200,
-    "Height": 140,
-    "Latitude": 100,
-    "Longitude": 100
+    "ContinentImageLocation": "/Resources/Images/Continents/antarctic-circle.png",
+    "Width": 800,
+    "Height": 200,
+    "Latitude": 200,
+    "Longitude": 0
   }
 ]

@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 
 namespace ContinentPro.Resources.Classes
 {
-    public class Continent
+    public struct Continent
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ContinentImageLocation { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+        string ContinentImageLocation { get; set; }
+        int Width { get; set; }
+        int Height { get; set; }
+        int Latitude { get; set; }
+        int Longitude { get; set; }
+        Places places { get; set; }
 
-        public Continent()
-        {
-        }
 
         public override string ToString()
         {

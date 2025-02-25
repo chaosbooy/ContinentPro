@@ -34,6 +34,10 @@
 
             </StackPanel>
 
+            <StackPanel Background="Pink" Grid.Column="1">
+                
+            </StackPanel>
+            
             <ScrollViewer Grid.Column="2" Background="#c49758" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                 <StackPanel>
 
