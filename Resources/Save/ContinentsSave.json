@@ -14,8 +14,8 @@
     "ContinentImageLocation": "/Resources/Images/Continents/asia.png",
     "Width": 400,
     "Height": 200,
-    "Latitude": 100,
-    "Longitude": 100
+    "Latitude": -100,
+    "Longitude": 340
   },
   {
     "Name": "Africa",
@@ -23,7 +23,7 @@
     "ContinentImageLocation": "/Resources/Images/Continents/africa.png",
     "Width": 200,
     "Height": 140,
-    "Latitude": 100,
+    "Latitude": 140,
     "Longitude": 100
   },
   {
@@ -48,10 +48,10 @@
     "Name": "Australia and Oceania",
     "Description": "Australia, officially known as the Commonwealth of Australia, is a sovereign country comprising the mainland of the Australian continent, the island of Tasmania, and numerous smaller islands.",
     "ContinentImageLocation": "/Resources/Images/Continents/oceania.png",
-    "Width": 300,
+    "Width": 350,
     "Height": 200,
-    "Latitude": 100,
-    "Longitude": 500
+    "Latitude": 140,
+    "Longitude": 650
   },
   {
     "Name": "Antarctica",

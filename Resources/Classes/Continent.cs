@@ -9,14 +9,14 @@ namespace ContinentPro.Resources.Classes
 {
     public struct Continent
     {
-        string Name { get; set; }
-        string Description { get; set; }
-        string ContinentImageLocation { get; set; }
-        int Width { get; set; }
-        int Height { get; set; }
-        int Latitude { get; set; }
-        int Longitude { get; set; }
-        Places places { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ContinentImageLocation { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Latitude { get; set; }
+        public int Longitude { get; set; }
+        public Places[] places { get; set; }
 
 
         public override string ToString()

@@ -8,12 +8,12 @@ namespace ContinentPro.Resources.Classes
 {
     public struct Places
     {
-        int X { get; set; }
-        int Y { get; set; }
-        string Name { get; set; }
-        string Description { get; set; }
-        string ImageLocation { get; set; }
-        string SoundLocation { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ImageLocation { get; set; }
+        public string SoundLocation { get; set; }
 
         Quiz[] quizzes { get; set; }
     }
