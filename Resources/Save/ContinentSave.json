@@ -1,0 +1,468 @@
+[
+  {
+    "Name": "Europe",
+    "Description": "Europe is a continent located entirely in the Northern Hemisphere and mostly in the Eastern Hemisphere. It comprises the westernmost part of Eurasia and is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, the Mediterranean Sea to the south, and Asia to the east.",
+    "ContinentImageLocation": "/Resources/Images/Continents/europe.png",
+    "Width": 200,
+    "Height": 140,
+    "Latitude": 100,
+    "Longitude": 100,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "France",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/france.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this structure named",
+            "Options": [
+              "Eiffle Tower",
+              "Eiffel Tower",
+              "Einstein's Towel"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/france1.png"
+          },
+          {
+            "Question": "What is the capital of France",
+            "Options": [
+              "Paris",
+              "Rome",
+              "London"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Italy",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/italy.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this structure named",
+            "Options": [
+              "Rome Colosseum",
+              "Tower of Pisa",
+              "Tower of Coloseum"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/italy1.png"
+          },
+          {
+            "Question": "What is the capital of Italy",
+            "Options": [
+              "Rome",
+              "Vatican",
+              "Venice"
+            ],
+            "Answer": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Asia",
+    "Description": "Asia is Earth's largest and most populous continent, located primarily in the Eastern and Northern Hemispheres. It shares the continental landmass of Eurasia with the continent of Europe and the continental landmass of Afro-Eurasia with both Europe and Africa.",
+    "ContinentImageLocation": "/Resources/Images/Continents/asia.png",
+    "Width": 400,
+    "Height": 200,
+    "Latitude": 100,
+    "Longitude": 100,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "China",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/china.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this structure called",
+            "Options": [
+              "Great Wall of China",
+              "Great Mall of China",
+              "China's Castle Walls"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/china1.png"
+          },
+          {
+            "Question": "What is the capital of China",
+            "Options": [
+              "Pekin",
+              "Shanghai",
+              "Taiwan"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "South Korea",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/south-korea.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this structure called",
+            "Options": [
+              "Deoksugung Palace",
+              "Daksinging Palace",
+              "Palace of Singing Ducks"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/south-korea1.png"
+          },
+          {
+            "Question": "What is the capital of South Korea",
+            "Options": [
+              "Seoul",
+              "Soul",
+              "Samsung"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Africa",
+    "Description": "Africa is the world's second-largest and second-most populous continent, after Asia in both cases. At about 30.3 million km² including adjacent islands, it covers 6% of Earth's total surface area and 20% of its land area.",
+    "ContinentImageLocation": "/Resources/Images/Continents/africa.png",
+    "Width": 200,
+    "Height": 140,
+    "Latitude": 100,
+    "Longitude": 100,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Egypt",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/egypt.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this structure called",
+            "Options": [
+              "The Great Sphinx",
+              "The Great Sfinks",
+              "Something Great Stinks"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/egypt1.png"
+          },
+          {
+            "Question": "What is the capital of Egypt",
+            "Options": [
+              "Kair",
+              "Keil",
+              "Kaririri"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Kongo",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/kongo.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/kongo1.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "North America",
+    "Description": "North America is a continent entirely within the Northern Hemisphere and almost all within the Western Hemisphere. It can also be described as the northern subcontinent of the Americas.",
+    "ContinentImageLocation": "/Resources/Images/Continents/north-america.png",
+    "Width": 200,
+    "Height": 140,
+    "Latitude": -150,
+    "Longitude": -380,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "USA",
+        "Description": "The United States of America (USA) is a large and diverse country in North America, bordered by Canada to the north and Mexico to the south. It consists of 50 states, including Alaska and Hawaii, and is known for its cultural, economic, and political influence worldwide. The USA has a rich history, from its founding in 1776 to becoming a global superpower. It boasts diverse landscapes, from vast forests and mountains to bustling cities like New York, Los Angeles, and Chicago. The country is a leader in technology, entertainment, and innovation, with a democratic government and a strong economy.",
+        "ImageLocation": "/Resources/Images/Places/usa.jpg",
+        "SoundLocation": "/Resources/Sounds/usa-sound.mp3",
+        "Quizzes": [
+          {
+            "Question": "What is this structure called",
+            "Options": [
+              "Statue of Liberty",
+              "Liberty Sign",
+              "Statue of Liver Tea"
+            ],
+            "Answer": 0,
+            "ImageLocation": "/Resources/Images/Quizzes/usa1.png"
+          },
+          {
+            "Question": "What is the capital of The United States",
+            "Options": [
+              "Wahsington",
+              "Washington",
+              "Washing tome"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Canada",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/canada.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/canada1.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "South America",
+    "Description": "South America is a continent in the Western Hemisphere, mostly in the Southern Hemisphere, with a relatively small portion in the Northern Hemisphere. It may also be considered a subcontinent of the Americas, which is how it is viewed in Spanish and Portuguese-speaking regions of the Americas.",
+    "ContinentImageLocation": "/Resources/Images/Continents/south-america.png",
+    "Width": 270,
+    "Height": 200,
+    "Latitude": 150,
+    "Longitude": -300,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Brasil",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/brasil.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "What is this Structure Called",
+            "Options": [
+              "Christ the Redeemer",
+              "Jesus Christ Statue",
+              "T Pose over Rio"
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/brasil1.png"
+          },
+          {
+            "Question": "What is the Capital of Basil",
+            "Options": [
+              "Brasilia",
+              "Rio De janero",
+              "Amazon Forest"
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Chile",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/chile.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/chile1.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Australia and Oceania",
+    "Description": "Australia, officially known as the Commonwealth of Australia, is a sovereign country comprising the mainland of the Australian continent, the island of Tasmania, and numerous smaller islands.",
+    "ContinentImageLocation": "/Resources/Images/Continents/oceania.png",
+    "Width": 300,
+    "Height": 200,
+    "Latitude": 100,
+    "Longitude": 500,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Australia",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/australia.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/australia.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      },
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "New Zealand",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/new-zealand.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/new-zealand.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Antarctica",
+    "Description": "Antarctica is Earth's southernmost continent. It contains the geographic South Pole and is situated in the Antarctic region of the Southern Hemisphere, almost entirely south of the Antarctic Circle, and is surrounded by the Southern Ocean.",
+    "ContinentImageLocation": "/Resources/Images/Continents/antarctic-circle.png",
+    "Width": 800,
+    "Height": 200,
+    "Latitude": 200,
+    "Longitude": 0,
+    "PlacesInfo": [
+      {
+        "X": 100,
+        "Y": 200,
+        "Name": "Antarctica",
+        "Description": "",
+        "ImageLocation": "/Resources/Images/Places/antarctica.png",
+        "SoundLocation": null,
+        "Quizzes": [
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": "/Resources/Images/Quizzes/antarctica.png"
+          },
+          {
+            "Question": "",
+            "Options": [
+              "",
+              "",
+              ""
+            ],
+            "Answer": 1,
+            "ImageLocation": null
+          }
+        ]
+      }
+    ]
+  }
+]

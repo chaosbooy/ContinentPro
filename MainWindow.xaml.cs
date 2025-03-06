@@ -1,6 +1,7 @@
 ﻿using ContinentPro.Resources.Classes;
 using System.Diagnostics;
 using System.IO;
+using System.Numerics;
 using System.Speech.Synthesis;
 using System.Text.Json;
 using System.Windows;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Shell;
 
 namespace ContinentPro
 {
@@ -23,6 +25,7 @@ namespace ContinentPro
         private double originalWidth, originalHeight, originalLeft, originalTop;
         private bool isExpanded = false;
         private readonly SpeechSynthesizer BuiltInSpeech= new();
+        private readonly MediaPlayer mediaPlayer = new();
 
         string? RootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
 
@@ -35,6 +38,10 @@ namespace ContinentPro
             this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
 
             BuiltInSpeech.StateChanged += ChangeSpeechUI;
+            mediaPlayer.MediaEnded += (s, e) =>
+            {
+                PlaceSound.Background = Brushes.Gray;
+            };
             ChangeSpeechUI(null, null);
         }
 
@@ -51,7 +58,7 @@ namespace ContinentPro
 
         public void InitialContinents()
         {
-            using (StreamReader r = new StreamReader(RootPath + "/Resources/Save/ContinentsSave.json"))
+            using (StreamReader r = new StreamReader(RootPath + "/Resources/Save/ContinentSave.json"))
             {
                 string jsonString = r.ReadToEnd();
 
@@ -125,7 +132,9 @@ namespace ContinentPro
                 case Key.Escape:
                     if (isExpanded && !isAnimating)
                     {
+                        BuiltInSpeech.SpeakAsyncCancelAll();
                         isExpanded = false;
+                        QuizPanel.Visibility = Visibility.Collapsed;
 
                         foreach (Label continent in continentButtons)
                         {
@@ -204,17 +213,150 @@ namespace ContinentPro
             AnimateButton(b, newWidth, newHeight, newLeft, newTop);
         }
 
+        private void Place_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            Places place = (Places)b.Tag;
+            PlaceName.Content = place.Name;
+            PlaceName.Tag = place;
+            PlaceDescription.Text = place.Description;
+            if (place.ImageLocation != null)
+                PlaceImage.Source = new BitmapImage(new Uri(RootPath + place.ImageLocation, UriKind.Absolute));
+            else
+                PlaceImage.Height = 0;
+
+            if (place.SoundLocation != null)
+            {
+                PlaceSound.Tag = place.SoundLocation;
+                PlaceSound.Visibility = Visibility.Visible;
+            }
+            else
+                PlaceSound.Visibility = Visibility.Hidden;
+
+            PlaceInfo.Visibility = Visibility.Visible;
+            PlacesList.Visibility = Visibility.Collapsed;
+        }
+
         private void BackToList(object sender, RoutedEventArgs e)
         {
+            BuiltInSpeech.SpeakAsyncCancelAll();
             PlacesList.Visibility = Visibility.Visible;
             PlaceInfo.Visibility = Visibility.Collapsed;
+            QuizPanel.Visibility = Visibility.Collapsed;
         }
 
         private void GoToQuiz(object sender, RoutedEventArgs e)
         {
+            QuizPanel.Visibility = Visibility.Visible;
 
+            QuizPanel.Tag = 0;
+            SetupQuestion(0);
         }
 
+        private void LeaveQuiz(object sender, RoutedEventArgs e)
+        {
+            QuizPanel.Visibility = Visibility.Collapsed; 
+            foreach (Button b in Answers.Children)
+            {
+                b.Background = Brushes.LightGray;
+            }
+        }
+
+
+        private void PlaySound(object sender, RoutedEventArgs e)
+        {
+            if (BuiltInSpeech.State == SynthesizerState.Speaking)
+            {
+                BuiltInSpeech.SpeakAsyncCancelAll();
+                return;
+            }
+            Button b = (Button)sender;
+            mediaPlayer.Open(new Uri(RootPath + b.Tag, UriKind.RelativeOrAbsolute));
+            mediaPlayer.Play();
+
+
+            PlaceSound.Background = Brushes.LightGreen;
+        }
+
+        #endregion
+
+        #region Quiz
+
+        private void AnswerClick(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            if (b.Tag != null && b.Tag.ToString() == "true")
+            {
+                b.Background = Brushes.LightGreen;
+            }
+            else
+            {
+                b.Background = Brushes.LightCoral;
+
+                foreach (Button answers in Answers.Children)
+                {
+                    if (answers.Tag != null && answers.Tag.ToString() == "true")
+                    {
+                        answers.Background = Brushes.LightGreen;
+                    }
+                }
+            }
+        }
+
+        private void NextQuestion(object sender, RoutedEventArgs e)
+        {
+            int currentQuestion = (int)QuizPanel.Tag;
+
+            if (currentQuestion + 1 >= ((Places)PlaceName.Tag).Quizzes.Length)
+            {
+                MessageBox.Show("No more questions");
+                return;
+            }
+
+            foreach(Button b in Answers.Children)
+            {
+                b.Background = Brushes.LightGray;
+            }
+
+            QuizPanel.Tag = currentQuestion + 1;
+            SetupQuestion((int)QuizPanel.Tag);
+        }
+
+        private void SetupQuestion(int questionIndex)
+        {
+            Places place = (Places)PlaceName.Tag;
+            Quiz[] quizzes = place.Quizzes;
+
+            if (quizzes == null || quizzes.Length == 0)
+            {
+                Debug.WriteLine("No quizzes found");
+                return;
+            }
+
+            Quiz quiz = quizzes[questionIndex];
+            Question.Text = quiz.Question;
+
+            Answer1.Content = quiz.Options[0];
+            Answer2.Content = quiz.Options[1];
+            Answer3.Content = quiz.Options[2];
+
+            Answer1.Tag = null;
+            Answer2.Tag = null;
+            Answer3.Tag = null;
+
+            switch (quiz.Answer)
+            {
+                case 0:
+                    Answer1.Tag = "true";
+                    break;
+                case 1:
+                    Answer2.Tag = "true";
+                    break;
+                case 2:
+                    Answer3.Tag = "true";
+                    break;
+            }
+        }
         #endregion
 
         #region UI
@@ -229,11 +371,12 @@ namespace ContinentPro
 
             PlacesList.Visibility = Visibility.Visible;
             PlaceInfo.Visibility = Visibility.Collapsed;
+            PlacesList.Children.Clear();
 
-            if(information.places == null)
+            if (information.PlacesInfo == null)
                 return;
 
-            foreach (Places place in information.places)
+            foreach (Places place in information.PlacesInfo)
             {
                 Button placeButton = new Button
                 {
@@ -248,26 +391,6 @@ namespace ContinentPro
                 placeButton.Click += Place_Click;
                 PlacesList.Children.Add(placeButton);
             }
-        }
-
-        private void Place_Click(object sender, RoutedEventArgs e)
-        {
-            Button b = (Button)sender;
-            Places place = (Places)b.Tag;
-            PlaceName.Content = place.Name;
-            PlaceDescription.Text = place.Description;
-            if(place.ImageLocation != null)
-                PlaceImage.Source = new BitmapImage(new Uri(RootPath + place.ImageLocation, UriKind.Absolute));
-            else
-                PlaceImage.Height = 0;
-
-            if (place.SoundLocation != null)
-                PlaceSpeech.Visibility = Visibility.Visible;
-            else
-                PlaceSpeech.Visibility = Visibility.Hidden;
-
-            PlaceInfo.Visibility = Visibility.Visible;
-            PlacesList.Visibility = Visibility.Collapsed;
         }
 
         bool isAnimating;

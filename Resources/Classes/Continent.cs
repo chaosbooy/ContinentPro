@@ -16,7 +16,7 @@ namespace ContinentPro.Resources.Classes
         public int Height { get; set; }
         public int Latitude { get; set; }
         public int Longitude { get; set; }
-        public Places[] places { get; set; }
+        public Places[] PlacesInfo { get; set; }
 
 
         public override string ToString()

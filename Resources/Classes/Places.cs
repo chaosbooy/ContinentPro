@@ -15,6 +15,6 @@ namespace ContinentPro.Resources.Classes
         public string ImageLocation { get; set; }
         public string SoundLocation { get; set; }
 
-        Quiz[] quizzes { get; set; }
+        public Quiz[] Quizzes { get; set; }
     }
 }
